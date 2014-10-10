@@ -53,12 +53,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.payu.hackathon</groupId>
-            <artifactId>discovery-client</artifactId>
+            <groupId>org.ratel</groupId>
+            <artifactId>ratel-client</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.payu.hackathon</groupId>
+            <groupId>org.ratel</groupId>
             <artifactId>service-commons</artifactId>
             <version>${project.version}</version>
         </dependency>        
@@ -68,8 +68,8 @@
         	<version>2.10.4</version>
         </dependency>
         <dependency>
-            <groupId>com.payu.hackathon</groupId>
-            <artifactId>servicediscovery-annotations</artifactId>
+            <groupId>org.ratel</groupId>
+            <artifactId>ratel-api</artifactId>
             <version>${project.version}</version>
         </dependency>         
     </dependencies>
