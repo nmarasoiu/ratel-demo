@@ -8,6 +8,7 @@
     <artifactId>ratel-examples</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>commons</module>
         <module>order</module>
         <module>pos</module>
         <module>user</module>
