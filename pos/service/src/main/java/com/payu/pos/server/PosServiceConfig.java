@@ -1,4 +1,4 @@
-package com.payu.user.server;
+package com.payu.pos.server;
 
 
 import com.payu.discovery.server.config.DiscoveryServiceConfig;
@@ -9,15 +9,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-@ComponentScan(basePackages = {"com.payu.order.server", "com.payu.training.service"})
+@ComponentScan(basePackages = {"com.payu.pos.server", "com.payu.training.service"})
 @Configuration
 @EnableAutoConfiguration
 @PropertySource("classpath:propertasy.properties")
 @Import(DiscoveryServiceConfig.class)
-public class UserServiceConfig {
+public class PosServiceConfig {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(UserServiceConfig.class, args);
+        SpringApplication.run(PosServiceConfig.class, args);
     }
 
 }

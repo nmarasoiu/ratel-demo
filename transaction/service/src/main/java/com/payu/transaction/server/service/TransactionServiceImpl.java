@@ -3,6 +3,7 @@ package com.payu.transaction.server.service;
 import com.payu.discovery.Publish;
 import com.payu.transaction.server.model.Transaction;
 import com.payu.transaction.server.model.TransactionDatabase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private TransactionDatabase database;
 
-	public void createTransaction(Transaction transaction) {
+	public Long createTransaction(Transaction transaction) {
 		log.info("Real Transaction service call : create Transaction {}",
 				transaction);
-		database.create(transaction);
+		return database.create(transaction);
 	}
 
 	public Transaction getTransactionById(Long id) {

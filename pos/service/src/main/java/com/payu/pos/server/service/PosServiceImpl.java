@@ -1,15 +1,18 @@
-package com.payu.user.server.service;
+package com.payu.pos.server.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.payu.discovery.Publish;
 import com.payu.training.database.GenericDatabase;
 import com.payu.user.server.model.Pos;
+import com.payu.user.server.service.PosService;
 
 
 @Service
+@Publish
 public class PosServiceImpl implements PosService {
 	
 
@@ -31,7 +34,7 @@ public class PosServiceImpl implements PosService {
     
     @Override
 	public int deletePoses() {
-    	log.info("Real Pos service call deletePoss ");
+    	log.info("Real Pos service call deletePoses ");
     	return database.clear();
     }
 

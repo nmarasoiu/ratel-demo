@@ -17,12 +17,13 @@ public abstract class GenericDatabase<T extends Serializable> {
 	
     private Map<Long, T> objects = new HashMap<>();
 
-    public void create(T object) {
+    public Long create(T object) {
     	forceFailureIfNeeded();
         Long key = 1L;
         if (!objects.isEmpty())
             key = obtainLastKey();
         objects.put(key, object);
+        return key;
     }
     
     protected abstract void setId(T object, long id);

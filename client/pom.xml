@@ -52,6 +52,24 @@
 
         <dependency>
             <groupId>org.ratel</groupId>
+            <artifactId>pos-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ratel</groupId>
+            <artifactId>transaction-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ratel</groupId>
+            <artifactId>user-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ratel</groupId>
             <artifactId>ratel-client</artifactId>
             <version>${project.version}</version>
         </dependency>

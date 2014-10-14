@@ -6,13 +6,12 @@ import com.payu.transaction.server.model.Transaction;
 
 public interface TransactionService {
 
-    void createTransaction(Transaction transaction);
 
-    public Transaction getTransactionById(Long id);
+	Long createTransaction(Transaction transaction);
+	Transaction getTransactionById(Long id);
 
-	public abstract int deletTransactions();
-	
-	public Collection<Transaction> getTransactionByOrderId(long orderId);
+	int deletTransactions();
 
+	Collection<Transaction> getTransactionByOrderId(long orderId);
 
 }

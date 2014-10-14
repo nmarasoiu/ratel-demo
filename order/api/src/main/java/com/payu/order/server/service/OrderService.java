@@ -6,11 +6,11 @@ import com.payu.order.server.model.Order;
 
 public interface OrderService {
 
-    void createOrder(Order order);
+    Long createOrder(Order order);
 
-    public Order getOrder(Long id);
+    Order getOrder(Long id);
 
-	public abstract int deleteOrderById();
+	int deleteOrderById();
 	
 	public Collection<Order> getOrdersByUserId(long userId);
 

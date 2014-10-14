@@ -3,6 +3,7 @@ package com.payu.order.server.service;
 import com.payu.discovery.Publish;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.model.OrderDatabase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private Environment env;
 
-	public void createOrder(Order order) {
+	public Long createOrder(Order order) {
 		log.info("Real order service call : create order {}", order);
-		database.create(order);
+		return database.create(order);
 	}
 
 	public Order getOrder(Long id) {
