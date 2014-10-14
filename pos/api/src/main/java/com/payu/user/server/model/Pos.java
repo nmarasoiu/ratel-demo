@@ -77,4 +77,5 @@ public class Pos implements Serializable {
 		return enabledPaymentMethodBrands.remove(o);
 	}
 
+
 }

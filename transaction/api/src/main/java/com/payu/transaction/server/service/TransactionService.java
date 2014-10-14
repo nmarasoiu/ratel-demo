@@ -8,6 +8,7 @@ public interface TransactionService {
 
 
 	Long createTransaction(Transaction transaction);
+	
 	Transaction getTransactionById(Long id);
 
 	int deletTransactions();
