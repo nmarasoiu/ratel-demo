@@ -15,9 +15,6 @@
 
     <packaging>jar</packaging>
 
-    <properties>
-        <start-class>com.payu.order.server.MainConfiguration</start-class>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -57,21 +54,5 @@
         	<version>2.4.0</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
