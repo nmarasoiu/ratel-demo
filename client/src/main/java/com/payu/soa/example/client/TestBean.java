@@ -126,7 +126,7 @@ public class TestBean {
 	private Long createTransaction(String paymentMethodBrand, Long orderId,
 			BigDecimal amount) {
 		Transaction trans = new Transaction(amount, paymentMethodBrand, orderId);
-		Long transId = transService.createTransaction(trans);
+		Long transId = transService.authorize(trans);
 		return transId;
 	}
 

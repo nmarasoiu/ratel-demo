@@ -32,7 +32,7 @@ public class FailureGenerator {
 	}
 
 	private void doThrowException() {
-		throw new NiespodziewanyException();
+		throw new NiespodziewanyException("siurpriza");
 	}
 
 	private void doTimeout() {
@@ -81,5 +81,34 @@ class NiespodziewanyException extends RuntimeException {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public NiespodziewanyException() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public NiespodziewanyException(String arg0, Throwable arg1, boolean arg2,
+			boolean arg3) {
+		super(arg0, arg1, arg2, arg3);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NiespodziewanyException(String arg0, Throwable arg1) {
+		super(arg0, arg1);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NiespodziewanyException(String arg0) {
+		super(arg0);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NiespodziewanyException(Throwable arg0) {
+		super(arg0);
+		// TODO Auto-generated constructor stub
+	}
+	
+
+	
 
 }

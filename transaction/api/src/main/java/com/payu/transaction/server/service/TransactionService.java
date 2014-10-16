@@ -7,7 +7,7 @@ import com.payu.transaction.server.model.Transaction;
 public interface TransactionService {
 
 
-	Long createTransaction(Transaction transaction);
+	Long authorize(Transaction transaction);
 	
 	Transaction getTransactionById(Long id);
 
