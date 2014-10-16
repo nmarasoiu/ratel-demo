@@ -2,6 +2,8 @@ package com.payu.transaction.server.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.payu.transaction.event.TransactionStatus;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -17,8 +19,14 @@ public class Transaction implements Serializable {
 	private BigDecimal amount;
     
     private long orderId;
+    
+    private TransactionStatus status = TransactionStatus.SENT;
 
-    public Transaction() {
+    public TransactionStatus getStatus() {
+		return status;
+	}
+
+	public Transaction() {
     }
 
     public Transaction(BigDecimal amount, String paymentMethodBrand, long orderId) {
@@ -109,7 +117,14 @@ public class Transaction implements Serializable {
 			return false;
 		return true;
 	}
+
+
+	public void setStatus(TransactionStatus status) {
+		this.status = status;
+	}
     
+	
+	
     
 	
 	

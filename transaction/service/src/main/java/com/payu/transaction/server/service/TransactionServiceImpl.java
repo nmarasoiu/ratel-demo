@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.payu.discovery.Publish;
@@ -34,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
 		
 		@Override
 		public void sendEvent(TransactionChangedEvent event) {
-			System.out.printf("Trans [%6] status update %s", event.getTransactionId(), event.getTransStatus());
+			System.out.printf("Trans [%6d] status update %s\n", event.getTransactionId(), event.getTransStatus());
 		}
 	};
 
@@ -69,18 +68,31 @@ public class TransactionServiceImpl implements TransactionService {
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	@Scheduled(initialDelay = 1000, fixedRate = 5000)
+//	@Scheduled(initialDelay = 1000, fixedRate = 5000)
 	public void notifyTransStatus() {
 		System.out.println("Sending notification");
 		int size = queue.size();
 		Long transToSendId = null;
 		while ( size-- > 0 && (transToSendId = queue.poll()) != null) {
-			sendTransStatusNotification(transToSendId);
+			try {
+				sendTransStatusNotification(transToSendId);
+			} catch (Exception e) {
+				queue.add(transToSendId);
+			}
 		}
 	}
 
 	private void sendTransStatusNotification(Long transId) {
+		Transaction transaction = database.get(transId);
+		transaction.setStatus(TransactionStatus.AUTHORIZED);
+		database.update(transaction);
 		eventSender.sendEvent(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, transId));
+	}
+
+	@Override
+	public TransactionStatus getTransactionstStatus(long transactionId) {
+		Transaction transaction = database.get(transactionId);
+		return transaction.getStatus();
 	}
 	
 	
