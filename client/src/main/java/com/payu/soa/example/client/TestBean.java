@@ -13,6 +13,7 @@ import com.payu.discovery.Discover;
 import com.payu.discovery.RetryPolicy;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.service.OrderService;
+import com.payu.transaction.event.TransactionChangedEvent;
 import com.payu.transaction.server.model.Transaction;
 import com.payu.transaction.server.service.TransactionService;
 import com.payu.user.server.model.Pos;
@@ -128,6 +129,11 @@ public class TestBean {
 		Transaction trans = new Transaction(amount, paymentMethodBrand, orderId);
 		Long transId = transService.authorize(trans);
 		return transId;
+	}
+	
+	//
+	public void receiveEvent(TransactionChangedEvent event) {
+		LOG.info("Transaction state confirmed " + event.getTransactionId());
 	}
 
 	private Long createAndActivateUser() {
