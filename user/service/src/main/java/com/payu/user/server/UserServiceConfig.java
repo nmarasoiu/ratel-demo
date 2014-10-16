@@ -1,7 +1,7 @@
 package com.payu.user.server;
 
 
-import com.payu.discovery.server.config.DiscoveryServiceConfig;
+import com.payu.discovery.register.config.DiscoveryServiceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
