@@ -1,47 +1,42 @@
 package com.payu.transaction.server.service;
 
+import com.payu.discovery.Discover;
+import com.payu.discovery.Publish;
+import com.payu.discovery.event.EventCannon;
+import com.payu.transaction.event.TransactionChangedEvent;
+import com.payu.transaction.event.TransactionStatus;
+import com.payu.transaction.server.model.Transaction;
+import com.payu.transaction.server.model.TransactionDatabase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.payu.discovery.Publish;
-import com.payu.transaction.event.EventSender;
-import com.payu.transaction.event.TransactionChangedEvent;
-import com.payu.transaction.event.TransactionStatus;
-import com.payu.transaction.server.model.Transaction;
-import com.payu.transaction.server.model.TransactionDatabase;
-
 @Service
 @Publish
 public class TransactionServiceImpl implements TransactionService {
 
-	private static final Logger log = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(TransactionServiceImpl.class);
 
 	@Autowired
 	private TransactionDatabase database;
 	
-//	@Discover
-	private EventSender eventSender = new EventSender() {
-		
-		@Override
-		public void sendEvent(TransactionChangedEvent event) {
-			System.out.printf("Trans [%6d] status update %s\n", event.getTransactionId(), event.getTransStatus());
-		}
-	};
+	@Discover
+	private EventCannon eventCannon;
 
 	private Queue<Long> queue = new ConcurrentLinkedQueue<>();
 
 	public Long authorize(Transaction transaction) {
-		log.info("Real Transaction service call : create Transaction {}",
-				transaction);
+		LOGGER.info("Real Transaction service call : create Transaction {}",
+                transaction);
 		Long trans = database.create(transaction);
 		putToAuthorizationQueue(trans);
 		return trans;
@@ -52,7 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	public Transaction getTransactionById(Long id) {
-		log.info("Real Transaction service call getById {}", id);
+		LOGGER.info("Real Transaction service call getById {}", id);
 		return database.get(id);
 	}
 
@@ -68,14 +63,15 @@ public class TransactionServiceImpl implements TransactionService {
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-//	@Scheduled(initialDelay = 1000, fixedRate = 5000)
+	@Scheduled(initialDelay = 1000, fixedRate = 5000)
 	public void notifyTransStatus() {
-		System.out.println("Sending notification");
+        eventCannon.fireThatShit(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, 123L));
 		int size = queue.size();
-		Long transToSendId = null;
-		while ( size-- > 0 && (transToSendId = queue.poll()) != null) {
-			try {
-				sendTransStatusNotification(transToSendId);
+        Long transToSendId = null;
+        while ( size-- > 0 && (transToSendId = queue.poll()) != null) {
+            try {
+                LOGGER.info("Sending notification");
+                sendTransStatusNotification(transToSendId);
 			} catch (Exception e) {
 				queue.add(transToSendId);
 			}
@@ -86,7 +82,7 @@ public class TransactionServiceImpl implements TransactionService {
 		Transaction transaction = database.get(transId);
 		transaction.setStatus(TransactionStatus.AUTHORIZED);
 		database.update(transaction);
-		eventSender.sendEvent(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, transId));
+        eventCannon.fireThatShit(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, transId));
 	}
 
 	@Override

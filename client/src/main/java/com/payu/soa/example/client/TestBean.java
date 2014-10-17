@@ -1,16 +1,9 @@
 package com.payu.soa.example.client;
 
-import java.math.BigDecimal;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.remoting.RemoteConnectFailureException;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
-
 import com.payu.discovery.Cachable;
 import com.payu.discovery.Discover;
 import com.payu.discovery.RetryPolicy;
+import com.payu.discovery.event.Subscribe;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.service.OrderService;
 import com.payu.transaction.event.TransactionChangedEvent;
@@ -21,11 +14,18 @@ import com.payu.user.server.model.User;
 import com.payu.user.server.service.NoSuchUserException;
 import com.payu.user.server.service.PosService;
 import com.payu.user.server.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.remoting.RemoteConnectFailureException;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 @Component
 public class TestBean {
 
-	private static Log LOG = LogFactory.getLog(TestBean.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(TestBean.class);
 
 	@Discover
 	@RetryPolicy(exception = RemoteConnectFailureException.class)
@@ -61,12 +61,12 @@ public class TestBean {
 
 		Long transId = createTransaction(paymentMethodBrand, orderId, amount);
 		
-		LOG.info("*** Transaction created  ***");
+		LOGGER.info("*** Transaction created  ***");
 
 		verifyPaymentProcess(transId, userId, orderId, sessionId, amount,
 				paymentMethodBrand, posId);
 		
-		LOG.info("*** Transaction verified ***");
+		LOGGER.info("*** Transaction verified ***");
 	}
 
 	private boolean verifyPaymentProcess(Long transId, Long userId,
@@ -83,12 +83,12 @@ public class TestBean {
 		Transaction trans = transService.getTransactionById(transId);
 
 		if (trans == null) {
-			LOG.error("Transaction not created");
+			LOGGER.error("Transaction not created");
 			return false;
 		}
 
 		if (!orderId.equals(trans.getOrderId())) {
-			LOG.error("Order not bound to transaction ");
+			LOGGER.error("Order not bound to transaction ");
 			return false;
 		}
 		return true;
@@ -98,12 +98,12 @@ public class TestBean {
 		Order order = orderService.getOrder(orderId);
 
 		if (order == null) {
-			LOG.error("Order not created");
+			LOGGER.error("Order not created");
 			return false;
 		}
 
 		if (!userId.equals(order.getUserId())) {
-			LOG.error("Order not created");
+			LOGGER.error("Order not created");
 			return false;
 		}
 		return true;
@@ -113,12 +113,12 @@ public class TestBean {
 		User user = userService.getUserById(userId);
 
 		if (user == null) {
-			LOG.error("User not created");
+			LOGGER.error("User not created");
 			return false;
 		}
 
 		if (!user.isActive()) {
-			LOG.error("User not activaated");
+			LOGGER.error("User not activaated");
 			return false;
 		}
 		return true;
@@ -131,9 +131,9 @@ public class TestBean {
 		return transId;
 	}
 	
-	//
+	@Subscribe
 	public void receiveEvent(TransactionChangedEvent event) {
-		LOG.info("Transaction state confirmed " + event.getTransactionId());
+		LOGGER.info("Transaction state confirmed " + event.getTransactionId());
 	}
 
 	private Long createAndActivateUser() {
