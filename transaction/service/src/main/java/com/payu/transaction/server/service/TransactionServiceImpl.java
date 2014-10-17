@@ -65,7 +65,6 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Scheduled(initialDelay = 1000, fixedRate = 5000)
 	public void notifyTransStatus() {
-        eventCannon.fireThatShit(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, 123L));
 		int size = queue.size();
         Long transToSendId = null;
         while ( size-- > 0 && (transToSendId = queue.poll()) != null) {
@@ -82,7 +81,8 @@ public class TransactionServiceImpl implements TransactionService {
 		Transaction transaction = database.get(transId);
 		transaction.setStatus(TransactionStatus.AUTHORIZED);
 		database.update(transaction);
-        eventCannon.fireThatShit(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, transId));
+        eventCannon.fireEvent(new TransactionChangedEvent(TransactionStatus.AUTHORIZED, transId));
+        LOGGER.info("Sent notification for transaction " + transId );
 	}
 
 	@Override
