@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @ComponentScan(basePackages = "com.payu.soa")
 @Configuration
 @EnableAutoConfiguration
-@PropertySource("classpath:client.properties")
 @Import(EventDrivenConfig.class)
+@EnableScheduling
 public class ClientTestApp {
 
     public static void main(String[] args) {
