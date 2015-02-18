@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@ComponentScan(basePackages = {"com.payu.order.server", "com.payu.training"})
+@ComponentScan(basePackages = {"com.payu.order.server", "com.payu.training", "com.payu.ratel"})
 @Configuration
 @EnableAutoConfiguration
 public class OrderServiceMain {

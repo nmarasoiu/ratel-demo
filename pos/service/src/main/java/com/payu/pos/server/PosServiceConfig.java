@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 
 
 
-@ComponentScan(basePackages = {"com.payu.pos.server", "com.payu.training.service"})
+@ComponentScan(basePackages = {"com.payu.pos.server", "com.payu.training.service", "com.payu.ratel"})
 @Configuration
 @EnableAutoConfiguration
 @Import(ServiceDiscoveryConfig.class)

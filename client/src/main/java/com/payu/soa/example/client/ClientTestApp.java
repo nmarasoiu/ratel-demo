@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@ComponentScan(basePackages = "com.payu.soa")
+@ComponentScan(basePackages ={"com.payu.soa", "com.payu.ratel"})
 @Configuration
 @EnableAutoConfiguration
 @Import(EventDrivenConfig.class)

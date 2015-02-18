@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-@ComponentScan(basePackages = {"com.payu.transaction.server", "com.payu.training"})
+@ComponentScan(basePackages = {"com.payu.transaction.server", "com.payu.training", "com.payu.ratel"})
 @Configuration
 @EnableAutoConfiguration
 @Import(ServiceDiscoveryConfig.class)
