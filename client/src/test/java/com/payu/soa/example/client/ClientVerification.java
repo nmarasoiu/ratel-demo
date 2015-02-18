@@ -3,10 +3,12 @@ package com.payu.soa.example.client;
 import com.payu.ratel.Discover;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.service.OrderService;
+import com.payu.ratel.RetryPolicy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.remoting.RemoteConnectFailureException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
@@ -19,16 +21,17 @@ public class ClientVerification {
 
     @Autowired
     @Discover
+    @RetryPolicy(exception = RemoteConnectFailureException.class)
     private OrderService testBean;
 
     @Test
-    public void shouldCreateAndGetOrder() throws Exception {
+    public void shouldCreateAndGetOrder() {
 
-        Order origOrder = new Order(BigDecimal.ZERO, "whatul");
+        Order origOrder = new Order(20L, "laptops");
         Long id = testBean.createOrder(origOrder);
-        final Order order = testBean.getOrder(id);
+        final Order reviewOrder = testBean.getOrder(id);
 
-        then(order).isNotNull().isEqualToIgnoringNullFields(origOrder);
+        then(reviewOrder).isNotNull().isEqualToIgnoringNullFields(origOrder);
 
     }
 }

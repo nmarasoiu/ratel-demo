@@ -13,13 +13,14 @@ public class Order implements Serializable {
 	private long userId;
 	
 	private String what;
-	
-	private BigDecimal amount;
+
+    //TODO: why BigDecimal does not work...?
+	private Long amount;
 
 	public Order() {
 	}
 
-	public Order(BigDecimal amount, String what) {
+	public Order(Long  amount, String what) {
 		this.amount = amount;
 		this.what = what;
 	}
@@ -28,7 +29,7 @@ public class Order implements Serializable {
 		return what;
 	}
 
-	public BigDecimal getAmount() {
+	public Long  getAmount() {
 		return amount;
 	}
 
@@ -36,7 +37,7 @@ public class Order implements Serializable {
 		this.what = what;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Long  amount) {
 		this.amount = amount;
 	}
 

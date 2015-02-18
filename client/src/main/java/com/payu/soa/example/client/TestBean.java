@@ -57,13 +57,13 @@ public class TestBean {
 
 		Order order = createOrder(sessionId, userId);
 		Long orderId = orderService.createOrder(order);
-		BigDecimal amount = order.getAmount();
+		Number amount = order.getAmount();
 
-		Long transId = createTransaction(paymentMethodBrand, orderId, amount);
+		Long transId = createTransaction(paymentMethodBrand, orderId, new BigDecimal(amount.longValue()));
 		
 		LOGGER.info("*** Transaction created  ***");
 
-		verifyPaymentProcess(transId, userId, orderId, sessionId, amount,
+		verifyPaymentProcess(transId, userId, orderId, sessionId, new BigDecimal(amount.longValue()),
 				paymentMethodBrand, posId);
 		
 		LOGGER.info("*** Transaction verified ***");
@@ -158,7 +158,7 @@ public class TestBean {
 	}
 
 	private Order createOrder(int sessionId, Long userId) {
-		Order order = new Order(new BigDecimal(Math.random() * 10000L), "Foo "
+		Order order = new Order(new BigDecimal(Math.random() * 10000L).longValue(), "Foo "
 				+ sessionId);
 		order.setUserId(userId);
 		return order;
