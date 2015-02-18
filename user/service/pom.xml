@@ -53,18 +53,13 @@
         </dependency>
         <dependency>
             <groupId>org.ratel</groupId>
-            <artifactId>ratel-client</artifactId>
+            <artifactId>service-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.ratel</groupId>
-            <artifactId>service-commons</artifactId>
-            <version>${project.version}</version>
-        </dependency>        
-        <dependency>
-            <groupId>org.ratel</groupId>
-            <artifactId>ratel-api</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.payu.ratel</groupId>
+            <artifactId>ratel-core</artifactId>
+            <version>1.1.0-SNAPSHOT</version>
         </dependency>
          <dependency>
         	<groupId>org.scala-lang</groupId>

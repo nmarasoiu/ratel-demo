@@ -1,6 +1,6 @@
 package com.payu.soa.example.client;
 
-import com.payu.discovery.event.EventDrivenConfig;
+import com.payu.ratel.event.EventDrivenConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;

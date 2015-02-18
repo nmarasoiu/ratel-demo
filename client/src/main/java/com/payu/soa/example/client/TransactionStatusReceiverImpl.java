@@ -1,6 +1,6 @@
 package com.payu.soa.example.client;
 
-import com.payu.discovery.event.Subscribe;
+import com.payu.ratel.event.Subscribe;
 import com.payu.transaction.event.TransactionChangedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

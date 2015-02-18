@@ -1,11 +1,11 @@
 package com.payu.soa.example.client;
 
-import com.payu.discovery.Cachable;
-import com.payu.discovery.Discover;
-import com.payu.discovery.RetryPolicy;
-import com.payu.discovery.event.Subscribe;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.service.OrderService;
+import com.payu.ratel.Cachable;
+import com.payu.ratel.Discover;
+import com.payu.ratel.RetryPolicy;
+import com.payu.ratel.event.Subscribe;
 import com.payu.transaction.event.TransactionChangedEvent;
 import com.payu.transaction.server.model.Transaction;
 import com.payu.transaction.server.service.TransactionService;

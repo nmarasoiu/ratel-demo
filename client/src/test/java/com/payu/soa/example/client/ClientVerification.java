@@ -1,6 +1,6 @@
 package com.payu.soa.example.client;
 
-import com.payu.discovery.Discover;
+import com.payu.ratel.Discover;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.service.OrderService;
 import org.junit.Test;

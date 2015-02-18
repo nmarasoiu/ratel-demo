@@ -1,6 +1,6 @@
 package com.payu.user.server.service;
 
-import com.payu.discovery.Publish;
+import com.payu.ratel.Publish;
 import com.payu.training.database.GenericDatabase;
 import com.payu.user.server.model.User;
 

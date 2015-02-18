@@ -1,9 +1,9 @@
 package com.payu.order.server.service;
 
-import com.payu.discovery.Publish;
 import com.payu.order.server.model.Order;
 import com.payu.order.server.model.OrderDatabase;
 
+import com.payu.ratel.Publish;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

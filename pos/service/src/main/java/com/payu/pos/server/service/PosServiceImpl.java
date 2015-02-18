@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.payu.discovery.Publish;
+import com.payu.ratel.Publish;
 import com.payu.user.server.model.Pos;
 import com.payu.user.server.service.PosService;
 

@@ -1,8 +1,8 @@
 package com.payu.transaction.server.service;
 
-import com.payu.discovery.Discover;
-import com.payu.discovery.Publish;
-import com.payu.discovery.event.EventCannon;
+import com.payu.ratel.Discover;
+import com.payu.ratel.Publish;
+import com.payu.ratel.event.EventCannon;
 import com.payu.transaction.event.TransactionChangedEvent;
 import com.payu.transaction.event.TransactionStatus;
 import com.payu.transaction.server.model.Transaction;
