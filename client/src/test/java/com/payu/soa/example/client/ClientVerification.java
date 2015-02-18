@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.BDDAssertions.then;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,10 +24,11 @@ public class ClientVerification {
     @Test
     public void shouldCreateAndGetOrder() throws Exception {
 
-        testBean.createOrder(new Order());
-        final Order order = testBean.getOrder(1L);
+        Order origOrder = new Order(BigDecimal.ZERO, "whatul");
+        Long id = testBean.createOrder(origOrder);
+        final Order order = testBean.getOrder(id);
 
-        then(order).isNotNull();
+        then(order).isNotNull().isEqualToIgnoringNullFields(origOrder);
 
     }
 }
